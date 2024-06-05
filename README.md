@@ -1,2 +1,2 @@
-# Music-App
-A music app recommendation &amp; collection
+# Movie-App
+A Movie app recommendation &amp; collection
