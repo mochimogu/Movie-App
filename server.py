@@ -8,11 +8,6 @@ import os
 load_dotenv()
 read_access_key = os.getenv('READ_ACCESS_KEY')
 
-website = "https://api.themoviedb.org/3/discover/movie"
-header = {
-    'Authorization': f'Bearer {read_access_key}'
-}
-
 app = Flask(__name__)
 
 @app.route("/")
@@ -22,20 +17,100 @@ def home():
 @app.route("/movies")
 def movies():
     
-    response = requests.get(website, headers=header)
-    print(response.status_code)
-    print(response.json())
+    playingNow = "https://api.themoviedb.org/3/movie/now_playing"
+    popular = "https://api.themoviedb.org/3/movie/popular"
+    topRated = "https://api.themoviedb.org/3/movie/top_rated"
+    upcoming = "https://api.themoviedb.org/3/movie/upcoming"
     
-    return render_template("./components/movie.html")
+    header = {
+        'Authorization': f'Bearer {read_access_key}'
+    }
+
+    response1 = requests.get(playingNow, headers=header).json()
+    response2 = requests.get(popular, headers=header).json()
+    response3 = requests.get(upcoming, headers=header).json()
+    response4 = requests.get(topRated, headers=header).json()
+
+    return render_template(
+        "./components/movie.html",
+        playingNow=(response1),
+        popular=(response2),
+        topRated=(response3),
+        upcoming=(response4)
+    )
 
 @app.route("/shows")
 def shows():
-    return render_template("./components/shows.html")
+    
+    header = {
+        'Authorization': f'Bearer {read_access_key}'
+    }
+    
+    airToday = "https://api.themoviedb.org/3/tv/airing_today"
+    onAir = "https://api.themoviedb.org/3/tv/on_the_air"
+    popular = "https://api.themoviedb.org/3/tv/popular"
+    topRated = "https://api.themoviedb.org/3/tv/top_rated"
+    
+    response1 = requests.get(airToday, headers=header).json()
+    response2 = requests.get(onAir, headers=header).json()
+    response3 = requests.get(popular, headers=header).json()
+    response4 = requests.get(topRated, headers=header).json()
+    
+    return render_template(
+        "./components/shows.html", 
+        airToday=response1,
+        onAir=response2,
+        popular=response3,
+        topRated=response4
+    )
 
 @app.route("/collection")
 def collection():
     # print(getAllData())
     return render_template("./components/collection.html")
+
+@app.route('/search', methods=['POST'])
+def redirectSearch():
+    if request.method == 'POST':
+        if(request.content_type == 'application/json'):
+            # print(request.get_json()['option'])
+            searchURL = ""
+            header = {
+                'Authorization': f'Bearer {read_access_key}'
+            }
+            
+            if(request.get_json()['option'] == 'movie'):
+                searchURL = f'https://api.themoviedb.org/3/search/movie?query={request.get_json()['search']}&include_adult=false&language=en-US&page=1'
+            else:
+                searchURL = f'https://api.themoviedb.org/3/search/tv?query={request.get_json()['search']}&include_adult=false&language=en-US&page=1'
+            
+            response = requests.get(searchURL, headers=header)
+            url = f'/search/{request.get_json()['option']}={request.get_json()['search']}'
+            
+            if response.json() != None:
+                return jsonify({'url' : url}) , 200
+            else: 
+                return 400
+
+@app.route("/search/<type>=<searchWord>")
+def search(searchWord, type):
+    print(type)
+    searchURL = ""
+    header = {
+        'Authorization': f'Bearer {read_access_key}'
+    }
+    
+    if(type == 'movie'):
+        searchURL = f'https://api.themoviedb.org/3/search/movie?query={searchWord}&include_adult=false&language=en-US&page=1'
+    else:
+        searchURL = f'https://api.themoviedb.org/3/search/tv?query={searchWord}&include_adult=false&language=en-US&page=1'
+
+    response = requests.get(searchURL, headers=header)
+    
+    print(response.json())
+    
+    return render_template('./components/search.html', data=(response.json()))
+
 
 
 

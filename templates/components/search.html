@@ -1,0 +1,9 @@
+{% include "components/head.html" %}
+<body>
+    {% include "components/nav.html" %}
+    <div class="listContainer">
+        {% for items in data.results %}
+            <h2>{{ items }}</h2>
+        {% endfor %}
+    </div>
+</body>

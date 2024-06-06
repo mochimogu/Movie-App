@@ -1,9 +1,14 @@
 
 {% block content %}
     <div>
-        <div>
+        <div class="searchContainer">
             <label for="search">Search</label>
-            <input type=text name=search>
+            <input id="searchInput" class=searchInput type=text name=search >
+            <select name="entertainment" class="option" id="entertainment">
+                <option value="" disable selected hidden>Select...</option>
+                <option value="tv">TV Shows</option>
+                <option value="movie">Movie</option>
+            </select>
         </div>
     </div>
 {% endblock %}

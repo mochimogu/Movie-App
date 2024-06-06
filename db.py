@@ -21,4 +21,14 @@ def getAllData():
                 return "error"
 
 
+def insertTV():
+    return 0
 
+def insertMovies():
+    return 0
+
+def deleteMovieFromCollection():
+    return 0
+
+def deleteTVFromCollection():
+    return 0

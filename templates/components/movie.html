@@ -2,6 +2,10 @@
 <body>
     {% include "components/nav.html" %}
     <div>
-        <script defer src="./static/getMovies.js"></script>
+        {% for items in popular.results %}
+            <div>
+                <h2>{{ items.title }}</h2>
+            </div>
+        {% endfor %}
     </div>
 </body>

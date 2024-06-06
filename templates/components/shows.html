@@ -1,4 +1,11 @@
 {% include "components/head.html" %}
 <body>
     {% include "components/nav.html" %}
+    <div>
+        {% for items in airToday.results %}
+            <div>
+                <h2>{{ items.original_name }}</h2>
+            </div>
+        {% endfor %}
+    </div>
 </body>
