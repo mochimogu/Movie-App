@@ -85,3 +85,43 @@ body {
     width: 50%;
     padding: 10px;
 }
+
+
+.posterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: none;
+}
+
+.posterDiv {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow-x: scroll;
+    width: 95vw;
+    padding: 5px;
+
+}
+
+#posterContent {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-content: center;
+    text-align: center;
+    padding: 15px;
+    width: 25%;
+    height: auto;
+    margin: 10px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+#posterContent img {
+    width: auto;
+    height: 300px;
+
+}

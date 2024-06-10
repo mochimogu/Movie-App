@@ -1,11 +1,54 @@
 {% include "components/head.html" %}
 <body>
     {% include "components/nav.html" %}
-    <div>
-        {% for items in popular.results %}
-            <div>
-                <h2>{{ items.title }}</h2>
+    <div id="posterContainer" class="posterContainer">
+        <div>
+            <h1>Most Popular</h1>
+            <div class="posterDiv">
+                {% for items in popular.results %}
+                    <div class={{ items.id }} id="posterContent">
+                        <h2>{{ items.title }}</h2>
+                        <a href="/movies/{{items.id}}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>
+                        <h3>{{ items.release_date }}</h3>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
+        <div>
+            <h1>Playing Now</h1>
+            <div class="posterDiv">
+                {% for items in playingNow.results %}
+                    <div class={{ items.id }} id="posterContent">
+                        <h2>{{ items.title }}</h2>
+                        <a href="/movies/{{items.id}}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>
+                        <h3>{{ items.release_date }}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <h1>Top Rated</h1>
+            <div class="posterDiv">
+                {% for items in topRated.results %}
+                    <div class={{ items.id }} id="posterContent">
+                        <h2>{{ items.title }}</h2>
+                        <a href="/movies/{{items.id}}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>
+                        <h3>{{ items.release_date }}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <h1>Upcoming</h1>
+            <div class="posterDiv">
+                {% for items in upcoming.results %}
+                    <div class={{ items.id }} id="posterContent">
+                        <h2>{{ items.title }}</h2>
+                        <a href="/movies/{{items.id}}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>
+                        <h3>{{ items.release_date }}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </body>

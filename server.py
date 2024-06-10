@@ -30,7 +30,6 @@ def movies():
     response2 = requests.get(popular, headers=header).json()
     response3 = requests.get(upcoming, headers=header).json()
     response4 = requests.get(topRated, headers=header).json()
-
     return render_template(
         "./components/movie.html",
         playingNow=(response1),
@@ -38,6 +37,39 @@ def movies():
         topRated=(response3),
         upcoming=(response4)
     )
+
+@app.route('/movies/<id>')
+def movieInfo(id):
+    print(id)
+    
+    url = f"https://api.themoviedb.org/3/movie/{id}?language=en-US"
+
+    header = {
+        'Authorization': f'Bearer {read_access_key}'
+    }
+
+    response = requests.get(url, headers=header)
+    
+    print(response.json())
+    
+    return render_template('./components/information.html')
+    
+
+@app.route('/shows/<id>')
+def showInfo(id):
+    print(id)
+    
+    url = f"https://api.themoviedb.org/3/tv/{id}?language=en-US"
+    
+    header = {
+        'Authorization': f'Bearer {read_access_key}'
+    }
+
+    response = requests.get(url, headers=header)
+    
+    print(response.json())
+    
+    return render_template('./components/information.html')
 
 @app.route("/shows")
 def shows():
@@ -55,6 +87,7 @@ def shows():
     response2 = requests.get(onAir, headers=header).json()
     response3 = requests.get(popular, headers=header).json()
     response4 = requests.get(topRated, headers=header).json()
+    print(response1)
     
     return render_template(
         "./components/shows.html", 
