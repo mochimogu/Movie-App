@@ -125,3 +125,55 @@ body {
     height: 300px;
 
 }
+
+.titleDiv {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.titleDiv h1 {
+    margin-bottom: 0;
+}
+
+.genreDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.genreDiv h3 {
+    margin: 10px 10px 10px 10px;
+}
+
+.overviewContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.overviewDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: justify;
+    width: 50%;
+    padding: 25px;
+}
+
+.infoDiv {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}

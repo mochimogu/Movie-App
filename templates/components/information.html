@@ -1,4 +1,85 @@
 {% include "components/head.html" %}
 <body>
     {% include "components/nav.html" %}
+    <div>
+        {% if type == 'movie' %}
+            <div class="titleDiv">
+                <h1 id="title">{{ information.original_title }}</h1>
+                <div class="genreDiv">
+                    {% for genre in information.genres %}
+                        <h3>{{ genre.name }}</h3>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="overviewContainer">
+                <img id="imageSrc" src={{ "https://www.themoviedb.org/t/p/original" + information.poster_path }} 
+                    alt="movie_poster" width=400 height=550>
+                <div class="overviewDiv">
+                    <h3>{{ information.overview }}</h3>
+                    <div class="buttonDiv" id="button">
+                        <button type=button id={{ movieId }} class="collectionButton" >Add to Watchlist</button>
+                    </div>
+                </div>
+            </div>
+            <div class="infoDiv">
+                <table id="infoTable">
+                    <tbody>
+                        <tr>
+                            <th>Status</th>
+                            <th>Release Date</th>
+                            <th>Budget</th>
+                            <th>Revenue</th>
+                            <th>Duration</th>
+                        </tr>
+                        <tr>
+                            <td>{{ information.status }}</td>
+                            <td>{{ information.release_date }}</td>
+                            <td>${{ information.budget }}</td>
+                            <td>${{ information.revenue }}</td>
+                            <td>{{ information.runtime }} min</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="titleDiv">
+                <h1 id="title">{{ information.original_name }}</h1>
+                <div class="genreDiv">
+                    {% for genre in information.genres %}
+                        <h3>{{ genre.name }}</h3>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="overviewContainer">
+                <img id="imageSrc" src={{ "https://www.themoviedb.org/t/p/original" + information.poster_path }} 
+                    alt="show_poster" width=400 height=550>
+                <div class="overviewDiv">
+                    <h3>{{ information.overview }}</h3>
+                    <div>
+                        <button type=button id={{ showId }} class="collectionButton" >Add to Watchlist</button>
+                    </div>
+                </div>
+            </div>
+            <div class="infoDiv">
+                <table id="infoTable">
+                    <tbody>
+                        <tr>
+                            <th>Status</th>
+                            <th>Release Date</th>
+                            <th>Popularity</th>
+                            <th>Episodes</th>
+                            <th>Seasons</th>
+                        </tr>
+                        <tr>
+                            <td>{{ information.status }}</td>
+                            <td>{{ information.first_air_date }}</td>
+                            <td>{{ information.popularity }}</td>
+                            <td>{{ information.number_of_episodes }}</td>
+                            <td>{{ information.number_of_seasons }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
 </body>

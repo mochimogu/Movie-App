@@ -30,6 +30,7 @@ def movies():
     response2 = requests.get(popular, headers=header).json()
     response3 = requests.get(upcoming, headers=header).json()
     response4 = requests.get(topRated, headers=header).json()
+    
     return render_template(
         "./components/movie.html",
         playingNow=(response1),
@@ -50,9 +51,9 @@ def movieInfo(id):
 
     response = requests.get(url, headers=header)
     
-    print(response.json())
+    # print(response.json())
     
-    return render_template('./components/information.html')
+    return render_template('./components/information.html', information=response.json(), type="movie", movieId=id)
     
 
 @app.route('/shows/<id>')
@@ -67,9 +68,9 @@ def showInfo(id):
 
     response = requests.get(url, headers=header)
     
-    print(response.json())
+    # print(response.json())
     
-    return render_template('./components/information.html')
+    return render_template('./components/information.html', information=response.json(), type="show", showId=id)
 
 @app.route("/shows")
 def shows():
@@ -87,7 +88,7 @@ def shows():
     response2 = requests.get(onAir, headers=header).json()
     response3 = requests.get(popular, headers=header).json()
     response4 = requests.get(topRated, headers=header).json()
-    print(response1)
+    # print(response1)
     
     return render_template(
         "./components/shows.html", 
@@ -96,6 +97,27 @@ def shows():
         popular=response3,
         topRated=response4
     )
+
+
+@app.route('/api/saveCinema', methods=['POST'])
+def saveCinema():
+    
+    if(request.method == 'POST'):
+        if(request.content_type == 'application/json'):
+            print(request.get_json())
+            
+            sending = {
+                'title' : request.get_json()['title'],
+                'id' : request.get_json()['id'],
+                'imageURL' : request.get_json()['imageURL'],
+                'release' : request.get_json()['release'],
+            }
+    
+        #sending to the backend
+    
+    return jsonify({'results' : 'success'}), 200
+    
+    
 
 @app.route("/collection")
 def collection():
