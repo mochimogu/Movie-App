@@ -92,19 +92,20 @@ def shows():
     
     return render_template(
         "./components/shows.html", 
-        airToday=response1,
-        onAir=response2,
-        popular=response3,
-        topRated=response4
+        airToday=(response1),
+        onAir=(response2),
+        popular=(response3),
+        topRated=(response4)
     )
 
+mockDatabase = []
 
 @app.route('/api/saveCinema', methods=['POST'])
 def saveCinema():
     
     if(request.method == 'POST'):
         if(request.content_type == 'application/json'):
-            print(request.get_json())
+            # print(request.get_json())
             
             sending = {
                 'title' : request.get_json()['title'],
@@ -114,6 +115,8 @@ def saveCinema():
             }
     
         #sending to the backend
+        mockDatabase.append(sending);
+        print(mockDatabase)
     
     return jsonify({'results' : 'success'}), 200
     
@@ -122,7 +125,10 @@ def saveCinema():
 @app.route("/collection")
 def collection():
     # print(getAllData())
-    return render_template("./components/collection.html")
+    print(mockDatabase)
+    
+    
+    return render_template("./components/collection.html", collection=mockDatabase)
 
 @app.route('/search', methods=['POST'])
 def redirectSearch():

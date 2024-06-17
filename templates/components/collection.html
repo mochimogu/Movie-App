@@ -1,4 +1,29 @@
 {% include "components/head.html" %}
 <body>
     {% include "components/nav.html" %}
+    <div>
+        {% for items in collection %}
+            <div>
+                <div class="collectionCard">
+                    <div class="imageDiv">
+                        <img alt="poster" id="" 
+                            src={{ "https://www.themoviedb.org/t/p/original" + items.imageURL }}
+                            height="250px"
+                            width="200px"    
+                        />
+                        <div class="imageInfoDiv">
+                            <div>
+                                <h1 id={{ items.id }}>{{ items.title }}</h1>
+                                <h2>{{ items.release }}</h2>
+                            </div>
+                            <div class="buttonDiv">
+                                <button type="button" class="deleteButton">Delete</button>
+                                <button type="button" class="watchedButton">Watched</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </body>
