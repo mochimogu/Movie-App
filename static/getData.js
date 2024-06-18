@@ -35,13 +35,26 @@ window.addEventListener('DOMContentLoaded', () => {
             const title = document.getElementById('title').innerText;
             const releaseDate = document.getElementById('infoTable').children[0].children[1].children[1].innerHTML;
             const buttonID = document.getElementById('button').children[0].id
-            
-            sending = {
-                'title' : title,
-                'id' : buttonID,
-                'imageURL' : imageURL,
-                'release' : releaseDate,
+            const type = document.getElementById('imageSrc').alt;
+
+            if(type == 'movie_poster') {
+                sending = {
+                    'title' : title,
+                    'id' : buttonID,
+                    'imageURL' : imageURL,
+                    'release' : releaseDate,
+                    'type' : 'movie'
+                }
+            } else {
+                sending = {
+                    'title' : title,
+                    'id' : buttonID,
+                    'imageURL' : imageURL,
+                    'release' : releaseDate,
+                    'type' : 'show'
+                }
             }
+
             console.log(sending)
 
             const response = await fetch('/api/saveCinema', {

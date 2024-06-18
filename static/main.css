@@ -182,13 +182,16 @@ table {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .imageDiv {
     display: flex;
-    justify-content: space-evenly;
     flex-direction: row;
     font-size: 12px;
+    width: 50%;
+    margin-top: 10px;
 }
 
 .imageInfoDiv {
@@ -202,10 +205,16 @@ table {
     margin-top: 0;
 }
 
+.imageInfoDiv img {
+    width: 10%;
+    height: 150px;
+}
+
 .buttonDiv {
     display: flex;
     flex-direction: row;
     margin: 10px;
+    width: 50%;
 }
 
 .buttonDiv button {

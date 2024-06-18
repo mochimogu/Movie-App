@@ -106,18 +106,23 @@ def saveCinema():
     if(request.method == 'POST'):
         if(request.content_type == 'application/json'):
             # print(request.get_json())
-            
-            sending = {
-                'title' : request.get_json()['title'],
-                'id' : request.get_json()['id'],
-                'imageURL' : request.get_json()['imageURL'],
-                'release' : request.get_json()['release'],
-            }
-    
-        #sending to the backend
-        mockDatabase.append(sending);
-        print(mockDatabase)
-    
+            existed = any(request.get_json()['title'] in item.values() for item in mockDatabase)
+            # print(existed)
+            if existed:
+                # print(mockDatabase)
+                print('already existed - not adding to collection')
+            else:
+                #sending to the backend
+                print(mockDatabase)
+                sending = {
+                    'title' : request.get_json()['title'],
+                    'id' : request.get_json()['id'],
+                    'imageURL' : request.get_json()['imageURL'],
+                    'release' : request.get_json()['release'],
+                    'type' : request.get_json()['type']
+                }
+                mockDatabase.append(sending)
+                
     return jsonify({'results' : 'success'}), 200
     
     

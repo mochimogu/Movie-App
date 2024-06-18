@@ -8,6 +8,7 @@
                 {% for items in popular.results %}
                     <div class={{ items.id }} id="posterContent">
                         <h2>{{ items.original_name }}</h2>
+                        <a href="/shows/{{ items.id }}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>
                         <h3>{{ items.first_air_date }}</h3>
                     </div>
                 {% endfor %}
@@ -19,6 +20,9 @@
                 {% for items in airToday.results %}
                     <div class={{ items.id }} id="posterContent">
                         <h2>{{ items.original_name }}</h2>
+                        {% if items.poster_path != None %}
+                            <a href="/shows/{{ items.id }}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>                        
+                        {% endif %}
                         <h3>{{ items.first_air_date }}</h3>
                     </div>
                 {% endfor %}
@@ -30,6 +34,9 @@
                 {% for items in onAir.results %}
                     <div class={{ items.id }} id="posterContent">
                         <h2>{{ items.original_name }}</h2>
+                        {% if items.poster_path != None %}
+                            <a href="/shows/{{ items.id }}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>                        
+                        {% endif %}
                         <h3>{{ items.first_air_date }}</h3>
                     </div>
                 {% endfor %}
@@ -41,6 +48,9 @@
                 {% for items in topRated.results %}
                     <div class={{ items.id }} id="posterContent">
                         <h2>{{ items.original_name }}</h2>
+                        {% if items.poster_path != None %}
+                            <a href="/shows/{{ items.id }}"><img src={{ "https://www.themoviedb.org/t/p/original" + items.poster_path }} alt="movie_poster"></a>                        
+                        {% endif %}
                         <h3>{{ items.first_air_date }}</h3>
                     </div>
                 {% endfor %}
