@@ -113,15 +113,30 @@ def saveCinema():
                 print('already existed - not adding to collection')
             else:
                 #sending to the backend
-                print(mockDatabase)
-                sending = {
-                    'title' : request.get_json()['title'],
-                    'id' : request.get_json()['id'],
-                    'imageURL' : request.get_json()['imageURL'],
-                    'release' : request.get_json()['release'],
-                    'type' : request.get_json()['type']
-                }
-                mockDatabase.append(sending)
+                # print(mockDatabase)
+                # sending = {
+                #     'title' : request.get_json()['title'],
+                #     'id' : request.get_json()['id'],
+                #     'imageURL' : request.get_json()['imageURL'],
+                #     'release' : request.get_json()['release'],
+                #     'type' : request.get_json()['type']
+                # }
+                if request.get_json()['type'] == 'movie':
+                    sending = {
+                        'title' : request.get_json()['title'],
+                        'movieId' : request.get_json()['id'],
+                        'poster' : request.get_json()['imageURL'],
+                        'releaseDate' : request.get_json()['release'],
+                    }
+                    insertMovies(sending)
+                else:
+                    sending = {
+                        'title' : request.get_json()['title'],
+                        'tvId' : request.get_json()['id'],
+                        'poster' : request.get_json()['imageURL'],
+                        'airDate' : request.get_json()['release'],
+                    }
+                    insertTV(sending)
                 
     return jsonify({'results' : 'success'}), 200
     
@@ -129,11 +144,12 @@ def saveCinema():
 
 @app.route("/collection")
 def collection():
-    # print(getAllData())
-    print(mockDatabase)
+    print(getAllData()[0][0][0]['shows'])
+    # print(mockDatabase)
+    movies = getAllData()[0][0][0]['movies']
+    shows = getAllData()[0][0][0]['shows']
     
-    
-    return render_template("./components/collection.html", collection=mockDatabase)
+    return render_template("./components/collection.html", moviesCollection=movies, showsCollection=shows)
 
 @app.route('/search', methods=['POST'])
 def redirectSearch():

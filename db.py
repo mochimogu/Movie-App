@@ -21,10 +21,28 @@ def getAllData():
                 return "error"
 
 
-def insertTV():
+def insertTV(data):
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT users FROM collection')
+            results = cursor.fetchall()
+            if results is not None:
+                results[0][0][0]['shows'].append(data)
+                # print(results[0][0][0]['shows'])
+                print(results)
+
     return 0
 
-def insertMovies():
+def insertMovies(data):
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT users FROM collection')
+            results = cursor.fetchall()
+            results[0][0][0]['movies'].append(data)
+            print(results[0][0][0]['movies'])
+            
+            updateQuery = """UPDATE """
+            
     return 0
 
 def deleteMovieFromCollection():
