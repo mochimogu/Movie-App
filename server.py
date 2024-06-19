@@ -113,14 +113,6 @@ def saveCinema():
                 print('already existed - not adding to collection')
             else:
                 #sending to the backend
-                # print(mockDatabase)
-                # sending = {
-                #     'title' : request.get_json()['title'],
-                #     'id' : request.get_json()['id'],
-                #     'imageURL' : request.get_json()['imageURL'],
-                #     'release' : request.get_json()['release'],
-                #     'type' : request.get_json()['type']
-                # }
                 if request.get_json()['type'] == 'movie':
                     sending = {
                         'title' : request.get_json()['title'],
@@ -144,10 +136,10 @@ def saveCinema():
 
 @app.route("/collection")
 def collection():
-    print(getAllData()[0][0][0]['shows'])
+    # print(getAllData()[0][0][0][0])
     # print(mockDatabase)
-    movies = getAllData()[0][0][0]['movies']
-    shows = getAllData()[0][0][0]['shows']
+    movies = getAllData()['movies']
+    shows = getAllData()['shows']
     
     return render_template("./components/collection.html", moviesCollection=movies, showsCollection=shows)
 
