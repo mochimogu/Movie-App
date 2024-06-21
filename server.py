@@ -98,45 +98,9 @@ def shows():
         topRated=(response4)
     )
 
-mockDatabase = []
-
-@app.route('/api/saveCinema', methods=['POST'])
-def saveCinema():
-    
-    if(request.method == 'POST'):
-        if(request.content_type == 'application/json'):
-            # print(request.get_json())
-            existed = any(request.get_json()['title'] in item.values() for item in mockDatabase)
-            # print(existed)
-            if existed:
-                # print(mockDatabase)
-                print('already existed - not adding to collection')
-            else:
-                #sending to the backend
-                if request.get_json()['type'] == 'movie':
-                    sending = {
-                        'title' : request.get_json()['title'],
-                        'movieId' : request.get_json()['id'],
-                        'poster' : request.get_json()['imageURL'],
-                        'releaseDate' : request.get_json()['release'],
-                    }
-                    insertMovies(sending)
-                else:
-                    sending = {
-                        'title' : request.get_json()['title'],
-                        'tvId' : request.get_json()['id'],
-                        'poster' : request.get_json()['imageURL'],
-                        'airDate' : request.get_json()['release'],
-                    }
-                    insertTV(sending)
-                
-    return jsonify({'results' : 'success'}), 200
-    
-    
-
 @app.route("/collection")
 def collection():
-    # print(getAllData()[0][0][0][0])
+    # print(getAllData())
     # print(mockDatabase)
     movies = getAllData()['movies']
     shows = getAllData()['shows']
@@ -185,8 +149,63 @@ def search(searchWord, type):
     
     return render_template('./components/search.html', data=(response.json()))
 
+mockDatabase = []
+@app.route('/api/saveCinema', methods=['POST'])
+def saveCinema():
+    
+    if(request.method == 'POST'):
+        if(request.content_type == 'application/json'):
+            # print(request.get_json())
+            existed = any(request.get_json()['title'] in item.values() for item in mockDatabase)
+            # print(existed)
+            if existed:
+                # print(mockDatabase)
+                print('already existed - not adding to collection')
+            else:
+                #sending to the backend
+                if request.get_json()['type'] == 'movie':
+                    sending = {
+                        'title' : request.get_json()['title'],
+                        'movieId' : request.get_json()['id'],
+                        'poster' : request.get_json()['imageURL'],
+                        'releaseDate' : request.get_json()['release'],
+                    }
+                    insertMovies(sending)
+                else:
+                    sending = {
+                        'title' : request.get_json()['title'],
+                        'tvId' : request.get_json()['id'],
+                        'poster' : request.get_json()['imageURL'],
+                        'airDate' : request.get_json()['release'],
+                    }
+                    insertTV(sending)
+                
+    return jsonify({'results' : 'success'}), 200
 
-
+@app.route('/api/deleteCinema', methods=['UPDATE'])
+def removeMovieFromColl():
+    
+    if request.method == 'UPDATE':
+        if request.content_type == 'application/json':
+            # print(request.get_json())
+            cinemaID = request.get_json()['cinemaID']
+            movies = getAllData()['movies']
+            shows = getAllData()['shows']
+            for items in movies:
+                if items['movieId'] == str(cinemaID):
+                    print('success in movie list')
+                else:
+                    print('not in movies list')
+                    
+            for items in shows:
+                if items['tvId'] == str(cinemaID):
+                    print('success in show list')
+                else:
+                    print('not in shows list')
+                    
+            
+            
+    return jsonify({'results' : 'success'}), 200
 
 if __name__ == "__main__":
     app.run()

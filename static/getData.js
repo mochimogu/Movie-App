@@ -74,4 +74,28 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 
+async function deleteFromCollection(e) {
+
+    console.log('hello world')
+    console.log(e.id)
+
+    sending = {
+        'cinemaID' : e.id
+    }
+
+    const response = await fetch('/api/deleteCinema', {
+        method : "UPDATE",
+        headers : {'Content-type' : "application/json"},
+        body : JSON.stringify(sending)
+    })
+
+    if(response.ok) {
+        console.log('okay');
+    } else {
+        console.log('bad');
+    }
+
+
+}
+
 

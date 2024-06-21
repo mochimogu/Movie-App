@@ -3,7 +3,7 @@
     {% include "components/nav.html" %}
     <div>
         <h1>Movies</h1>
-        <div class="collectionCard">
+        <div class="collectionCard" id="movieCollection">
             {% for items in moviesCollection %}
                 <div class="imageDiv">
                     <img alt="poster" id="image" 
@@ -12,12 +12,16 @@
                         width="35%"    
                     />
                     <div class="imageInfoDiv">
-                        <div>
-                            <h1 id={{ items.movieId }}>{{ items.title }}</h1>
+                        <div id="movieDiv">
+                            <h1 id={{ items.movieId }} class="movie">{{ items.title }}</h1>
                             <h2>{{ items.releaseDate }}</h2>
                         </div>
                         <div class="buttonDiv">
-                            <button type="button" class="deleteButton">Delete</button>
+                            <button type="button" 
+                                    class="deleteButton" 
+                                    onclick="deleteFromCollection(this)"
+                                    id={{ items.movieId }}
+                                >Delete</button>
                             <button type="button" class="watchedButton">Watched</button>
                         </div>
                     </div>
@@ -27,19 +31,23 @@
         <h1>TV Shows</h1>
         <div class="collectionCard">
             {% for items in showsCollection %}
-                <div class="imageDiv">
+                <div class="imageDiv" >
                     <img alt="poster" id="image" 
                         src={{ "https://www.themoviedb.org/t/p/original" + items.poster }}
                         height="100%"
                         width="35%"    
                     />
                     <div class="imageInfoDiv">
-                        <div>
-                            <h1 id={{ items.tvId }}>{{ items.title }}</h1>
+                        <div id='showDiv'>
+                            <h1 id={{ items.tvId }}  class="show">{{ items.title }}</h1>
                             <h2>{{ items.airDate }}</h2>
                         </div>
                         <div class="buttonDiv">
-                            <button type="button" class="deleteButton">Delete</button>
+                            <button type="button" 
+                                    class="deleteButton" 
+                                    onclick="deleteFromCollection(this)"
+                                    id={{ items.tvId }}
+                                >Delete</button>
                             <button type="button" class="watchedButton">Watched</button>
                         </div>
                     </div>
