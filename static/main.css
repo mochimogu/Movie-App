@@ -1,5 +1,6 @@
 body {
     font-family: sans-serif;
+
 }
 
 .navbarContainer {
@@ -78,6 +79,11 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     text-align: center;
+    /* background-image: url("../templates/images/360_F_774922426_WALF0poVYxbm86FAVNYY9QNrBAi3NwDo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+    background-color: black;
 }
 
 .listCard {
@@ -235,6 +241,10 @@ table {
     border-bottom-right-radius: 10px;
 }
 
+.image {
+    height: 100%;
+    width: 50px;
+}
 
 
 

@@ -6,11 +6,11 @@
         <div class="collectionCard" id="movieCollection">
             {% for items in moviesCollection %}
                 <div class="imageDiv">
-                    <img alt="poster" id="image" 
+                    <a class="image" href="/movies/{{items.movieId}}"><img alt="poster" id="image" 
                         src={{ "https://www.themoviedb.org/t/p/original" + items.poster }}
                         height="100%"
                         width="35%"    
-                    />
+                    /></a>
                     <div class="imageInfoDiv">
                         <div id="movieDiv">
                             <h1 id={{ items.movieId }} class="movie">{{ items.title }}</h1>
@@ -32,11 +32,11 @@
         <div class="collectionCard">
             {% for items in showsCollection %}
                 <div class="imageDiv" >
-                    <img alt="poster" id="image" 
+                    <a href="/shows/{{ items.tvId }}"><img alt="poster" id="image" 
                         src={{ "https://www.themoviedb.org/t/p/original" + items.poster }}
                         height="100%"
                         width="35%"    
-                    />
+                    /></a>
                     <div class="imageInfoDiv">
                         <div id='showDiv'>
                             <h1 id={{ items.tvId }}  class="show">{{ items.title }}</h1>

@@ -90,7 +90,11 @@ async function deleteFromCollection(e) {
     })
 
     if(response.ok) {
+        const results = await response.json()
         console.log('okay');
+        if(results.results == 'success') {
+            window.location.reload();
+        }
     } else {
         console.log('bad');
     }

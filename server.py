@@ -189,17 +189,20 @@ def removeMovieFromColl():
         if request.content_type == 'application/json':
             # print(request.get_json())
             cinemaID = request.get_json()['cinemaID']
+            # print(cinemaID)
             movies = getAllData()['movies']
             shows = getAllData()['shows']
             for items in movies:
                 if items['movieId'] == str(cinemaID):
                     print('success in movie list')
+                    deleteMovieFromCollection(cinemaID)
                 else:
                     print('not in movies list')
                     
             for items in shows:
                 if items['tvId'] == str(cinemaID):
                     print('success in show list')
+                    deleteTVFromCollection(cinemaID)
                 else:
                     print('not in shows list')
                     
